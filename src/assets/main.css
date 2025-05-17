@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+:root {
+    --color-primary: 42 26 94; /* #2A1A5E For background and Branding. Feels powerful, professional, and High-end */
+    --color-secondary: 229 193 0; /* #E5C100 For Accents & Highlights. Represent Wealth, Prosperity, and Success */
+    --color-text: 248 249 250; /* #F8F9FA Ensures easy reading against dark backgrounds */
+    --color-neutral: 51 51 51; /* #333333 For borders and dividers. Provides a subtle contrast without being too harsh */
+}
+
+.dark {
+  --color-primary: 42 26 94;
+  --color-secondary: 229 193 0;
+  --color-text: 255 255 255;
+  --color-neutral: 26 26 26;
+}
+
