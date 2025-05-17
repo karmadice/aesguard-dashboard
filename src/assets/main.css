@@ -1,16 +1,41 @@
 @import "tailwindcss";
 
-:root {
-    --color-primary: 42 26 94; /* #2A1A5E For background and Branding. Feels powerful, professional, and High-end */
-    --color-secondary: 229 193 0; /* #E5C100 For Accents & Highlights. Represent Wealth, Prosperity, and Success */
-    --color-text: 248 249 250; /* #F8F9FA Ensures easy reading against dark backgrounds */
-    --color-neutral: 51 51 51; /* #333333 For borders and dividers. Provides a subtle contrast without being too harsh */
+@layer theme {
+    :root {
+      --color-primary: #2A1A5E; /* For background and Branding. Feels powerful, professional, and High-end */
+      --color-secondary: #E5C100; /* For Accents & Highlights. Represent Wealth, Prosperity, and Success */
+      --color-text: #212529; /* For main text. Provides a strong contrast against the background */
+      --color-light-text: #F8F9FA; /* Ensures easy reading against dark backgrounds */
+      --color-neutral: #333333; /* For borders and dividers. Provides a subtle contrast without being too harsh */
+      --color-border: #e5e7eb; /* matches Tailwind gray-200 */
+    }
+
+    .dark {
+    /* Optional: override any colors in dark mode */
+    --color-border: var(--color-neutral);
+    --color-text: var(--color-light-text);
+  }
 }
 
-.dark {
-  --color-primary: 42 26 94;
-  --color-secondary: 229 193 0;
-  --color-text: 255 255 255;
-  --color-neutral: 26 26 26;
-}
 
+@layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--color-border); /* consistent border across elements */
+  }
+
+  ::before, ::after {
+    --tw-content: "";
+  }
+
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+@custom-variant dark (&:where(.dark, .dark *));

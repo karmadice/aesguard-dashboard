@@ -9,7 +9,7 @@
     >
       <div class="flex justify-between items-center lg:px-4 p-3 border-b dark:border-n500">
         <h5 class="h5">Notifications</h5>
-        <RouterLink to="/notifications" onClick="{toggleOpen}" class="text-primary text-sm"> View All </RouterLink>
+        <RouterLink to="/notifications" onClick="{toggleOpen}" class="text-primary/90 text-sm"> View All </RouterLink>
       </div>
       <ul class="flex flex-col w-[310px] p-2 xxl:p-3.5">
         <div v-for="notification in notifications" :key="notification.id" class="flex gap-2 cursor-pointer p-2 rounded-md hover:bg-primary/10 duration-300">
