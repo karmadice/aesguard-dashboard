@@ -1,13 +1,3 @@
-<template>
-    <div>
-        <NavbarTop
-        :is-sidebar-open="isSidebarOpen"
-        :toggle-sidebar="toggleSidebar"
-        >
-
-        </NavbarTop>
-    </div>
-</template>
 
 <script setup>
 import { ref, onMounted, onBeforeMount } from 'vue'
@@ -24,3 +14,13 @@ defineProps({
 })
 
 </script>
+<template>
+    <div>
+        <NavbarTop
+        :is-sidebar-open="isSidebarOpen"
+        :toggle-sidebar="toggleSidebar"
+        >
+
+        </NavbarTop>
+    </div>
+</template>

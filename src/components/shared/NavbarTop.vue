@@ -1,3 +1,15 @@
+<script setup>
+import { IconMenu2, IconSearch } from "@tabler/icons-vue"
+import ModeSwitcher from "@/components/topbar/ModeSwitcher.vue"
+import NotificationDropdown from "@/components/topbar/NotificationDropdown.vue"
+import SwitchLanguage from "@/components/topbar/SwitchLanguage.vue"
+import ProfileDropDown from "@/components/topbar/ProfileDropDown.vue"
+defineProps({
+  isSidebarOpen: Boolean,
+  toggleSidebar: Function,
+});
+</script>
+
 <template>
   <nav
     class="fixed top-0 left-0 right-0 z-20 flex items-center justify-between gap-3 px-4 xxl:px-6 py-2 xl:py-3 xxl:py-3.5 shadow-sm duration-300 bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text))] dark:border-b dark:border-[rgb(var(--color-neutral))]"
@@ -26,16 +38,8 @@
     <div class="flex items-center gap-3 sm:gap-4 xxl:gap-6">
       <ModeSwitcher />
       <NotificationDropdown />
+      <SwitchLanguage />
+      <ProfileDropDown />
     </div>
   </nav>
 </template>
-
-<script setup>
-import { IconMenu2, IconSearch } from "@tabler/icons-vue";
-import ModeSwitcher from "@/components/topbar/ModeSwitcher.vue";
-import NotificationDropdown from "@/components/topbar/NotificationDropdown.vue";
-defineProps({
-  isSidebarOpen: Boolean,
-  toggleSidebar: Function,
-});
-</script>

@@ -5,7 +5,7 @@
       --color-primary: #2A1A5E; /* For background and Branding. Feels powerful, professional, and High-end */
       --color-secondary: #E5C100; /* For Accents & Highlights. Represent Wealth, Prosperity, and Success */
       --color-text: #212529; /* For main text. Provides a strong contrast against the background */
-      --color-light-text: #F8F9FA; /* Ensures easy reading against dark backgrounds */
+      --color-light: #F8F9FA; /* Ensures easy reading against dark backgrounds */
       --color-neutral: #333333; /* For borders and dividers. Provides a subtle contrast without being too harsh */
       --color-border: #e5e7eb; /* matches Tailwind gray-200 */
     }

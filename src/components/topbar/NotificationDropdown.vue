@@ -1,31 +1,3 @@
-<template>
-  <div ref="target" class="relative">
-    <button @click="isOpen = !isOpen" class="p-2 sm:p-3 rounded-full bg-primary/5 dark:bg-bg3">
-      <IconBell :size="20" />
-    </button>
-    <div
-      class="bg-n0 border dark:border-n500 dark:bg-n800 rounded-md max-sm:origin-top ltr:sm:origin-top-right rtl:sm:origin-top-left rtl:max-sm:-left-[142px] ltr:max-sm:-right-[142px] ltr:sm:right-0 rtl:sm:left-0 shadow-lg absolute top-full duration-300"
-      :class="{ 'opacity-100 scale-100 visible': isOpen, 'opacity-0 scale-0 invisible': !isOpen }"
-    >
-      <div class="flex justify-between items-center lg:px-4 p-3 border-b dark:border-n500">
-        <h5 class="h5">Notifications</h5>
-        <RouterLink to="/notifications" onClick="{toggleOpen}" class="text-primary/90 text-sm"> View All </RouterLink>
-      </div>
-      <ul class="flex flex-col w-[310px] p-2 xxl:p-3.5">
-        <div v-for="notification in notifications" :key="notification.id" class="flex gap-2 cursor-pointer p-2 rounded-md hover:bg-primary/10 duration-300">
-          <img :src="notification.img" width="40" height="40" class="rounded-full shrink-0 size-10" alt="img" />
-          <div class="text-sm">
-            <div class="flex gap-1">
-              <span class="font-medium">{{ notification.name }}</span>
-              <span>{{ notification.activity }}</span>
-            </div>
-            <span class="text-n100 dark:text-n50 text-xs">{{ notification.time }}</span>
-          </div>
-        </div>
-      </ul>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
 import { IconBell } from '@tabler/icons-vue'
 import { onClickOutside } from '@vueuse/core'
@@ -72,3 +44,32 @@ const notifications = [
   }
 ]
 </script>
+
+<template>
+  <div ref="target" class="relative">
+    <button @click="isOpen = !isOpen" class="p-2 sm:p-3 rounded-full bg-primary/5 dark:bg-bg3">
+      <IconBell :size="20" />
+    </button>
+    <div
+      class="bg-light border dark:border-neutral-500 dark:bg-neutral-800 rounded-md max-sm:origin-top sm:origin-top-left max-sm:-left-[142px] sm:left-0 shadow-lg absolute top-full duration-300"
+      :class="{ 'opacity-100 scale-100 visible': isOpen, 'opacity-0 scale-0 invisible': !isOpen }"
+    >
+      <div class="flex justify-between items-center lg:px-4 p-3 border-b dark:border-neutral-500">
+        <h5 class="h5">Notifications</h5>
+        <RouterLink to="/notifications" onClick="{toggleOpen}" class="text-primary/90 text-sm"> View All </RouterLink>
+      </div>
+      <ul class="flex flex-col w-[310px] p-2 xxl:p-3.5">
+        <div v-for="notification in notifications" :key="notification.id" class="flex gap-2 cursor-pointer p-2 rounded-md hover:bg-primary/10 duration-300">
+          <img :src="notification.img" width="40" height="40" class="rounded-full shrink-0 size-10" alt="img" />
+          <div class="text-sm">
+            <div class="flex gap-1">
+              <span class="font-medium">{{ notification.name }}</span>
+              <span>{{ notification.activity }}</span>
+            </div>
+            <span class="text-text dark:text-light text-xs">{{ notification.time }}</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</template>
