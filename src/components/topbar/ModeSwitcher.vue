@@ -1,5 +1,5 @@
 <script setup>
-import { useLayoutStore } from '@/stores/layoutStore';
+import { useLayoutStore } from '@/composable/stores/layoutStore';
 import { IconMoon, IconSun } from '@tabler/icons-vue';
 const { theme, toggleDark } = useLayoutStore();
 </script>

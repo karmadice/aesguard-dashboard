@@ -1,4 +1,4 @@
-<script setup lang="jsx">
+<script setup>
 import { IconMessage } from '@tabler/icons-vue'
 import { IconLifebuoy } from '@tabler/icons-vue'
 import { IconLogout } from '@tabler/icons-vue'

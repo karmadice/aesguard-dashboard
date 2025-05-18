@@ -2,6 +2,7 @@
 <script setup>
 import { ref, onMounted, onBeforeMount } from 'vue'
 import NavbarTop from '@/components/shared/NavbarTop.vue'
+import LeftSideBar from '@/components/sidebar/LeftSideBar.vue'
 defineProps({
     isSidebarOpen: {
         type: Boolean,
@@ -10,7 +11,12 @@ defineProps({
     toggleSidebar: {
         type: Function,
         default: () => {}
+    },
+    setSidebar: {
+        type: Function,
+        default: () => {}
     }
+    
 })
 
 </script>
@@ -22,5 +28,10 @@ defineProps({
         >
 
         </NavbarTop>
+        <LeftSideBar
+        :is-sidebar-open="isSidebarOpen"
+        :toggle-sidebar="toggleSidebar"
+        :set-sidebar="setSidebar"
+        ></LeftSideBar>
     </div>
 </template>

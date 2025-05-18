@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import { IconPigMoney } from '@tabler/icons-vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -17,6 +17,18 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
     },
+    {
+      path: '/accounts/assets',
+      name: 'AssetAccounts',
+      component: () => import('@/views/accounts/AssetAccounts.vue'),
+      meta: {
+        sidebar: {
+          group: 'Accounts',
+          title: 'Asset Accounts',
+          icon: IconPigMoney
+        }
+      }
+    }
   ],
 })
 
