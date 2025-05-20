@@ -1,37 +1,24 @@
-
 <script setup>
-import { ref, onMounted, onBeforeMount } from 'vue'
-import NavbarTop from '@/components/shared/NavbarTop.vue'
-import LeftSideBar from '@/components/sidebar/LeftSideBar.vue'
-defineProps({
-    isSidebarOpen: {
-        type: Boolean,
-        default: false
-    },
-    toggleSidebar: {
-        type: Function,
-        default: () => {}
-    },
-    setSidebar: {
-        type: Function,
-        default: () => {}
-    }
-    
-})
+import { ref, onMounted, onBeforeMount } from "vue";
+import NavbarTop from "@/components/shared/NavbarTop.vue";
+import LeftSideBar from "@/components/sidebar/LeftSideBar.vue";
 
+const isSidebarOpen = ref(true);
+const setSidebar = (value) => {
+  isSidebarOpen.value = value;
+};
+
+const toggleSidebar = () => {
+  setSidebar(!isSidebarOpen.value);
+};
 </script>
 <template>
-    <div>
-        <NavbarTop
-        :is-sidebar-open="isSidebarOpen"
-        :toggle-sidebar="toggleSidebar"
-        >
-
-        </NavbarTop>
-        <LeftSideBar
-        :is-sidebar-open="isSidebarOpen"
-        :toggle-sidebar="toggleSidebar"
-        :set-sidebar="setSidebar"
-        ></LeftSideBar>
-    </div>
+  <div>
+    <NavbarTop :isSidebarOpen="isSidebarOpen" :toggleSidebar="toggleSidebar" />
+    <LeftSideBar
+      :is-sidebar-open="isSidebarOpen"
+      :toggleSidebar="toggleSidebar"
+      :set-sidebar="setSidebar"
+    ></LeftSideBar>
+  </div>
 </template>

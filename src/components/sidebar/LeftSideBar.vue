@@ -14,11 +14,7 @@ const { sidebarGroups } = useSidebar();
 const props = defineProps({
   isSidebarOpen: {
     type: Boolean,
-    default: false,
-  },
-  toggleSidebar: {
-    type: Function,
-    default: () => {},
+    default: true,
   },
   setSidebar: {
     type: Function,
@@ -154,13 +150,6 @@ watch(() => router.currentRoute.value.path, updateActiveMenu);
               alt="Logo"
             />
           </RouterLink>
-          <button
-            class="xxl:hidden"
-            @click="toggleSidebar"
-            aria-label="Close sidebar"
-          >
-            <IconX />
-          </button>
         </div>
       </div>
       <div class="overflow-y-auto fixed right-0 left-0 h-full">

@@ -1,27 +1,34 @@
-import { useRouter } from "vue-router"
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export function useSidebar() {
-    const router = useRouter()
-    const routers = router.getRoutes()
+  const router = useRouter()
+  const routes = router.getRoutes()
 
-    const sidebarGroups = {}
+  const sidebarGroupsMap = {}
 
-    routers.forEach(route => {
-        const meta = route.meta?.sidebar
-        if (meta) {
-            if(!sidebarGroups[meta.group]) {
-                sidebarGroups[meta.group] = {
-                    name: meta.group,
-                    items:[]
-                }
-            }
-            sidebarGroups[meta.group].items.push({
-                title: meta.title,
-                path: route.path,
-                icon: meta.iicon 
-            })
+  routes.forEach(route => {
+    const meta = route.meta?.sidebar
+    if (meta) {
+      if (!sidebarGroupsMap[meta.group]) {
+        sidebarGroupsMap[meta.group] = {
+          title: meta.group,
+          items: [],
         }
-    })
+      }
 
-    return Object.values(sidebarGroups)
+      sidebarGroupsMap[meta.group].items.push({
+        meta: {
+          title: meta.title,
+          icon: meta.icon,
+        },
+        path: route.path,
+        children: route.children || [], // optional: handle nested routes
+      })
+    }
+  })
+
+  const sidebarGroups = ref(Object.values(sidebarGroupsMap))
+
+  return { sidebarGroups }
 }
