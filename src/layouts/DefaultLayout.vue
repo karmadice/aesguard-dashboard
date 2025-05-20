@@ -1,8 +1,12 @@
 <script setup>
-import { ref, onMounted, onBeforeMount } from "vue";
-import NavbarTop from "@/components/shared/NavbarTop.vue";
-import LeftSideBar from "@/components/sidebar/LeftSideBar.vue";
+import { ref, onMounted, onBeforeMount } from "vue"
+import NavbarTop from "@/components/shared/NavbarTop.vue"
+import LeftSideBar from "@/components/sidebar/LeftSideBar.vue"
+import BaseButton from "@/components/base/BaseButton.vue"
 
+import {
+  IconDashboard,
+} from "@tabler/icons-vue"
 //Sidebar state
 const isSidebarOpen = ref(true);
 

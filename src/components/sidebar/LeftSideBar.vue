@@ -153,7 +153,7 @@ watch(() => router.currentRoute.value.path, updateActiveMenu);
         </div>
       </div>
       <div class="overflow-y-auto fixed right-0 left-0 h-full">
-        <div class="px-4 xxl:px-6 xxxl:px-8 pb-24">
+        <div class="px-4 xxl:px-6 xxxl:px-8 pb-3">
           <div v-for="group in sidebarGroups" :key="group.title">
             <p
               class="text-xs font-semibold py-4 xl:py-5 border-t-2 border-dashed border-neutral/20"

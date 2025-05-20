@@ -14,6 +14,10 @@ const props = defineProps({
     type: String,
     default: "md", // 'sm' | 'md' | 'lg'
   },
+  href: {
+    type: String,
+    default: ''
+  },
   disabled: {
     type: Boolean,
     default: false,
@@ -26,6 +30,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  fullWidth: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const emit = defineEmits(["click"]);
@@ -35,72 +43,45 @@ const isDisabled = computed(
   () => props.disabled || props.loading || attrs.disabled
 );
 
-const classes = computed(() => {
-  const base =
-    "inline-flex items-center justify-center rouned-xl font-medium transition duraiton-200 focus:outline-none focus-visible: ring02 focus-visible:ring-offset-2";
 
+const isLink = computed(() => props.as === 'a')
+
+const baseStyles = computed(() => {
   const variants = {
-    primary: "bg-primary text-white hover:bg-primary/90 disabled:bg-primary/50",
-    secondary:
-      "bg-secondary text-black hover:bg-secondary/90 disabled:bg-secondary/50",
-    outline:
-      "border border-primary text-primary hover:bg-primary/5 disabled:opacity-50",
-  };
-
-  const sizes = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-4 py-2 text-base",
-    lg: "px-5 py-3 text-lg",
-  };
-
-  return [base, variants[props.variant], sizes[props.size]];
-});
-
-function handleClick(event) {
-  if (isDisabled.value) {
-    event.preventDefault();
-    event.stopImmediatePropagation?.();
-    return;
+    default: 'bg-blue-600 text-white hover:bg-blue-700',
+    outline: 'border border-gray-300 text-gray-700 hover:bg-gray-100',
+    ghost: 'bg-transparent hover:bg-gray-100 text-gray-700',
   }
-  emit("click", event);
-}
+
+  return [
+    'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2',
+    'disabled:opacity-50 disabled:pointer-events-none',
+    'h-10 px-4 py-2 gap-2',
+    variants[props.variant] || variants.default,
+    props.fullWidth ? 'w-full' : ''
+  ].join(' ')
+})
 </script>
 
 <template>
   <component
-    :is="props.as"
-    v-bind="attrs"
-    :type="
-      props.as === 'button' || props.as === 'input' ? props.type : undefined
-    "
-    :aria-disabled="isLink ? isDisabled : undefined"
-    :disabled="!isLink && isDisabled"
-    class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-primary/90"
+    :is="as"
+    :href="isLink ? href : undefined"
+    :type="!isLink ? type : undefined"
+    :disabled="!isLink && (disabled || loading)"
+    :class="baseStyles"
   >
-    <template v-if="loading">
-      <svg
-        class="animate-spin h-4 w-4 mr-2 text-white"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          class="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          stroke-width="4"
-        />
-        <path
-          class="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-        />
-      </svg>
-    </template>
-    <slot name="icon-left" />
-    <slot />
+    <!-- Left Icon -->
+    <slot name="icon" />
+
+    <!-- Button Content -->
+    <span v-if="!loading">
+      <slot />
+    </span>
+    <span v-else class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+
+    <!-- Right Icon -->
     <slot name="icon-right" />
   </component>
 </template>
