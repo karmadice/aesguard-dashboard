@@ -132,7 +132,7 @@ watch(() => router.currentRoute.value.path, updateActiveMenu);
     ></div>
     <aside
       ref="sidebarRef"
-      class="w-[280px] xxxl:w-[336px] shadow-sm z-[21] min-h-screen duration-300 fixed bg-light dark:bg-neutral-400"
+      class="w-[280px] h-screen top-0 left-0 xxxl:w-[336px] shadow-sm z-[21] min-h-screen duration-300 fixed bg-light dark:bg-neutral-400"
       :class="{
         'translate-x-0 visible': isSidebarOpen,
         '-translate-x-full invisible': !isSidebarOpen,
