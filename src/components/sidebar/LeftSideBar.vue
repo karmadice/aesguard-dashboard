@@ -132,7 +132,7 @@ watch(() => router.currentRoute.value.path, updateActiveMenu);
     ></div>
     <aside
       ref="sidebarRef"
-      class="w-[280px] h-screen top-0 left-0 xxxl:w-[336px] shadow-sm z-[21] min-h-screen duration-300 fixed bg-light dark:bg-neutral-400"
+      class="w-[280px] h-screen top-0 left-0 xxxl:w-[336px] shadow-sm z-[21] min-h-screen duration-300 fixed bg-gray-100 dark:bg-gray-900"
       :class="{
         'translate-x-0 visible': isSidebarOpen,
         '-translate-x-full invisible': !isSidebarOpen,
@@ -164,7 +164,7 @@ watch(() => router.currentRoute.value.path, updateActiveMenu);
               <li
                 v-for="menu in group.items"
                 :key="menu.name"
-                class="relative rounded-xl duration-300"
+                class="relative rounded-xl duration-300 dark:text-white"
                 :class="{
                   'bg-neutral/5 dark:bg-neutral-700':
                     activeMenu === menu.meta?.title,

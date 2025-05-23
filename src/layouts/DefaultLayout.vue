@@ -15,7 +15,7 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="relative min-h-screen bg-muted/40 text-muted-foreground flex">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300 flex">
     <!-- Sidebar -->
     <LeftSideBar
       :is-sidebar-open="isSidebarOpen"

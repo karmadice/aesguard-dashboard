@@ -51,7 +51,7 @@ const notifications = [
       <IconBell :size="20" />
     </button>
     <div
-      class="bg-light border dark:border-neutral-500 dark:bg-neutral-800 rounded-md max-sm:origin-top sm:origin-top-left max-sm:-left-[142px] sm:left-0 shadow-lg absolute top-full duration-300"
+      class="bg-light border dark:border-neutral-500 dark:bg-white rounded-md max-sm:origin-top sm:origin-top-left max-sm:-left-[142px] sm:left-0 shadow-lg absolute top-full duration-300"
       :class="{ 'opacity-100 scale-100 visible': isOpen, 'opacity-0 scale-0 invisible': !isOpen }"
     >
       <div class="flex justify-between items-center lg:px-4 p-3 border-b dark:border-neutral-500">

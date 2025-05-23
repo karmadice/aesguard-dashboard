@@ -12,13 +12,13 @@ const props = defineProps({
 
 <template>
   <nav
-    class="fixed top-0 right-0 z-20 flex items-center justify-between gap-3 px-4 xxl:px-6 py-2 xl:py-3 xxl:py-3.5 shadow-sm duration-300 bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text))] dark:border-b dark:border-[rgb(var(--color-neutral))]"
+    class="fixed top-0 right-0 z-20 flex items-center justify-between gap-3 px-4 xxl:px-6 py-2 xl:py-3 xxl:py-3.5 shadow-sm duration-300 bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text))] dark:bg-gray-950 dark:border-b dark:border-[rgb(var(--color-neutral))]"
     :class="{
       'w-full': !isSidebarOpen,
       'w-[calc(100%-280px)] xxxl:w-[calc(100%-336px)]': isSidebarOpen,
     }"
   >
-    <div class="flex grow md:gap-4 xxl:gap-6 items-center">
+    <div class="flex grow md:gap-4 xxl:gap-6 items-center dark:text-white">
       <button @click="props.toggleSidebar">
         <IconMenu2 />
       </button>
