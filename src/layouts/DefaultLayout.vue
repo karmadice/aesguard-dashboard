@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import NavbarTop from "@/components/shared/NavbarTop.vue";
 import LeftSideBar from "@/components/sidebar/LeftSideBar.vue";
-
+import Select from "@/UI/Select.vue"
 const isSidebarOpen = ref(true);
 
 const setSidebar = (value) => {
@@ -39,6 +39,7 @@ const toggleSidebar = () => {
         }"
       >
         <div class="px-4 md:px-6 xl:px-10 py-6 max-w-[1700px] mx-auto">
+          <Select />
           <slot />
         </div>
       </main>
