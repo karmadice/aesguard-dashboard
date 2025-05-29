@@ -1,6 +1,5 @@
-<script setup lang="ts">
-import DefaultLayout from './layouts/DefaultLayout.vue';
-import { ref } from 'vue';
+<script setup>
+import DefaultLayout from "./layouts/DefaultLayout.vue";
 </script>
 
 <template>

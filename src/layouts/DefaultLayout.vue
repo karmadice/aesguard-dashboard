@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import NavbarTop from "@/components/shared/NavbarTop.vue";
 import LeftSideBar from "@/components/sidebar/LeftSideBar.vue";
-import Select from "@/UI/Select.vue"
+import Currency from "@/UI/Currency.vue";
 const isSidebarOpen = ref(true);
 
 const setSidebar = (value) => {
@@ -15,7 +15,9 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300 flex">
+  <div
+    class="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300 flex"
+  >
     <!-- Sidebar -->
     <LeftSideBar
       :is-sidebar-open="isSidebarOpen"
@@ -26,20 +28,17 @@ const toggleSidebar = () => {
     <!-- Main content area -->
     <div class="flex-1 flex flex-col">
       <!-- Top Navbar -->
-      <NavbarTop
-        :isSidebarOpen="isSidebarOpen"
-        :toggleSidebar="toggleSidebar"
-      />
+      <NavbarTop :isSidebarOpen="isSidebarOpen" :toggleSidebar="toggleSidebar" />
 
       <!-- Page content below navbar -->
       <main
         class="pt-[64px] md:pt-[72px] lg:pt-[88px] transition-all duration-300"
         :class="{
-          'ml-[280px] xxxl:ml-[336px]': isSidebarOpen
+          'ml-[280px] xxxl:ml-[336px]': isSidebarOpen,
         }"
       >
         <div class="px-4 md:px-6 xl:px-10 py-6 max-w-[1700px] mx-auto">
-          <Select />
+          <Currency />
           <slot />
         </div>
       </main>
