@@ -1,16 +1,10 @@
 <script setup>
-import { ref, computed, watch } from "vue";
-import { onClickOutside } from "@vueuse/core";
+import { ref, watch, onMounted } from "vue";
+import BaseButton from "@/components/base/BaseButton.vue";
 
 const props = defineProps({
-  modelValue: {
-    type: Number,
-    default: null,
-  },
-  currency: {
-    type: String,
-    default: "USD",
-  },
+  modelValue: [Number, String],
+  currency: String,
   currencies: {
     type: Array,
     default: () => [
@@ -25,65 +19,72 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue", "update:currency"]);
 
 const localValue = ref(props.modelValue);
-const localCurrency = ref(props.currency);
+const localCurrency = ref(props.currency || "USD");
 const dropdownOpen = ref(false);
+const dropdownRef = ref(null);
 
-const currencySymbol = computed(() => {
-  return props.currencies.find((c) => c.value === localCurrency.value)?.label || "";
-});
+const toggleDropdown = () => {
+  dropdownOpen.value = !dropdownOpen.value;
+};
 
-// Emit changes
-watch(localValue, (val) => emit("update:modelValue", parseFloat(val)));
-watch(localCurrency, (val) => emit("update:currency", val));
-
-const toggleDropdown = () => (dropdownOpen.value = !dropdownOpen.value);
 const selectCurrency = (currency) => {
   localCurrency.value = currency.value;
+  emit("update:currency", currency.value);
   dropdownOpen.value = false;
 };
 
-// Close dropdown on outside click
-const dropdownRef = ref(null);
-onClickOutside(dropdownRef, () => (dropdownOpen.value = false));
+watch(localValue, (val) => {
+  emit("update:modelValue", val);
+});
+
+// Close dropdown when clicking outside
+onMounted(() => {
+  document.addEventListener("click", (e) => {
+    if (dropdownRef.value && !dropdownRef.value.contains(e.target)) {
+      dropdownOpen.value = false;
+    }
+  });
+});
 </script>
 
 <template>
-  <div ref="dropdownRef" class="relative w-full max-w-md">
-    <div
-      class="flex items-center border rounded overflow-hidden focus-within:ring-2 ring-blue-500"
-    >
-      <!-- Currency Button -->
-      <button
-        type="button"
-        class="px-3 py-2 bg-gray-100 text-sm border-r border-gray-300"
+  <div
+    class="relative inline-flex items-center border rounded w-full max-w-sm overflow-visible"
+  >
+    <!-- Currency Selector Button -->
+    <div ref="dropdownRef" class="relative">
+      <BaseButton
+        class="px-3 border-r bg-white dark:bg-gray-900 rounded-none text-sm font-medium whitespace-nowrap"
+        variant="primary"
         @click="toggleDropdown"
       >
-        {{ currencySymbol }}
-      </button>
+        {{ currencies.find((c) => c.value === localCurrency)?.label || localCurrency }}
+      </BaseButton>
 
-      <!-- Amount Input -->
-      <input
-        type="number"
-        class="flex-1 px-3 py-2 text-sm outline-none"
-        :value="localValue"
-        @input="localValue = $event.target.value"
-        placeholder="Enter amount"
-      />
+      <!-- Dropdown Menu -->
+      <div
+        v-if="dropdownOpen"
+        class="absolute left-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded shadow-md z-50 w-32"
+      >
+        <ul>
+          <li
+            v-for="currency in currencies"
+            :key="currency.value"
+            class="px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
+            @click="selectCurrency(currency)"
+          >
+            {{ currency.label }} — {{ currency.value }}
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Dropdown -->
-    <ul
-      v-if="dropdownOpen"
-      class="absolute left-0 mt-1 bg-white border rounded shadow w-32 z-50"
-    >
-      <li
-        v-for="currency in currencies"
-        :key="currency.value"
-        class="px-3 py-2 text-sm hover:bg-gray-100 cursor-pointer"
-        @click="selectCurrency(currency)"
-      >
-        {{ currency.label }} - {{ currency.value }}
-      </li>
-    </ul>
+    <!-- Input Field -->
+    <input
+      type="number"
+      class="flex-1 px-3 py-2 outline-none dark:bg-gray-900 dark:text-white"
+      v-model="localValue"
+      placeholder="Enter amount"
+    />
   </div>
 </template>
